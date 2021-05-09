@@ -1,5 +1,5 @@
 import pandas as pd
-from tkinter.filedialog import askopenfilename
+#from tkinter.filedialog import askopenfilename
 import numpy as np
 import datetime
 
@@ -19,6 +19,7 @@ class Weather():
 
         #self.df = pd.read_csv(askopenfilename())
         self.df = pd.read_csv(cmd_folder + 'austin_weather.csv')
+        print(self.df.columns, "\n")
 
         #Date col from str to datetime obj
         self.df["Date"] = pd.to_datetime(self.df["Date"], format='%Y-%m-%d')
@@ -86,9 +87,10 @@ def main():
         end_date = input("Slutdatum: ")
     else:
         start_date = "2016-05-25"
-        end_date = "2016-06-2"
+        end_date = "2016-06-20"
     
     temp = int(input("Lägsta temperatur? "))
+    
 
     inspo = Weather(start_date, end_date)
 
@@ -98,6 +100,9 @@ def main():
     inspo.criterias(inspo.df, temp)
 
     print(inspo.suggest.to_string(index=False))
+
+    
+
 
 if __name__ == "__main__":
     main()
